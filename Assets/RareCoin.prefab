@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4520812674098395335}
   - component: {fileID: 6968082233492075146}
   m_Layer: 0
-  m_Name: Coin
+  m_Name: RareCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7895c51d2d2d44a8c8a60eed02bef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Amount: 10
+  Amount: 100
   Graphics: {fileID: 5057684116473439435}
   DeathSound: {fileID: 4458124300790143408, guid: 155dd94e16096ae4da71a27489b43b61, type: 3}
   DeathPartice: {fileID: 4773629164046789419, guid: 55ed2fd6581e2e84489c6b1fba9979e3, type: 3}
@@ -336,7 +336,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 976264438, guid: 7c8b4b3f8f88e6f4eafaaba6eb0a3c89, type: 3}
-  m_Color: {r: 0.9150943, g: 0.7730492, b: 0.6690548, a: 1}
+  m_Color: {r: 0.72327036, g: 0.09780057, b: 0.14606622, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

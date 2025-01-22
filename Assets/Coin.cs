@@ -6,17 +6,28 @@ public class Coin : MonoBehaviour
 
     private Collider2D _collider2D;
 
-    private AudioSource _audioSource;
+    //private AudioSource _audioSource;
     public GameObject Graphics;
-    public AudioClip AudioClip;
+    public GameObject DeathSound;
+    public GameObject DeathPartice;
+
+    private ScoreManager scoreManager;
+    
+    //public AudioClip AudioClip;
+    
+    
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _collider2D = GetComponent<Collider2D>();
-        _audioSource = GetComponent<AudioSource>();
 
+        
+
+        _collider2D = GetComponent<Collider2D>();
+        //_audioSource = GetComponent<AudioSource>();
+        scoreManager = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
+           
         if (_collider2D)
         {
             Debug.Log("2dcollider" + _collider2D);      
@@ -25,20 +36,38 @@ public class Coin : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Debug.Log("We should Destory");
+        //Debug.Log("We should Destory");
 
 
-        if (_audioSource && AudioClip && !_audioSource.isPlaying) 
+        //if (_audioSource && AudioClip && !_audioSource.isPlaying) 
+        //{
+        //    _audioSource.PlayOneShot(AudioClip);
+        //}
+
+        //if (Graphics)
+        //{
+        //    Graphics.SetActive(false);
+        //}
+
+        //Invoke("Destroy", 1f);
+
+        if (DeathSound) 
         {
-            _audioSource.PlayOneShot(AudioClip);
+            GameObject.Instantiate(DeathSound, transform.position, transform.rotation);
         }
 
-        if (Graphics)
+        if (DeathPartice) 
         {
-            Graphics.SetActive(false);
+            GameObject.Instantiate(DeathPartice, transform.position, transform.rotation);
         }
 
-        Invoke("Destroy", 1f);
+        if (scoreManager) 
+        {
+            scoreManager.AddScore(Amount);
+        }
+
+        Destroy(gameObject);
+
 
     }
 
