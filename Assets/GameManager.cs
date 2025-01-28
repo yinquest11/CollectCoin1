@@ -21,13 +21,25 @@ public class GameManager : MonoBehaviour
     //Element 0 就是第一个GameObject，以此类推
     public GameObject[] TurnOnWhenEnd;
     public GameObject[] TurnOfWhenEnd;
+    
 
     //要引用ScoreManager class(组件)的.CurrentScore, 需要先创造这个Class的变量
     private ScoreManager scoreManager;
 
     //计时器，一直倒数的float变量
     private float timer;
+
+    public GameObject Red;
+    public GameObject Yellow;
+    public GameObject Black;
+    public GameObject Blue1;
+    public GameObject Blue2;
+    public GameObject Blue3;
+    public GameObject Pig;
+
     
+
+
     //开始的时候
     void Start()
     {
@@ -37,6 +49,14 @@ public class GameManager : MonoBehaviour
 
         //用public GameDuration来给timer赋值，决定从什么时候开始倒计时，timer是会一直变化的，所以最好用别的变量给他赋值避免在游戏中意外修改
         timer = GameDuration;
+
+        Red.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        Yellow.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        Blue1.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        Blue2.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        Blue3.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        Black.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        Pig.GetComponent<Rigidbody2D>().gravityScale = 1f;
 
     }
 
@@ -50,7 +70,7 @@ public class GameManager : MonoBehaviour
             //timer扣除Time.deltaTime之后把CurrentTimeText所被赋予的Text GameObject的text换成目前timer的时间(剩余还有多少时间可以扣)
             if (CurrentTimeText)
             {
-                CurrentTimeText.text = timer.ToString();
+                CurrentTimeText.text = "Time: "+timer.ToString();
 
                 //停止当前在使用的方法，在这个情况中也就是Update(),那么下一帧就会继续 扣除，显示，扣除，显示，...， 直到timer <= 0
                 return;
@@ -66,10 +86,21 @@ public class GameManager : MonoBehaviour
             2. 被写好"Times Up"的 Text GameObejct
             3. 被scoreManager.CurrentScore 赋值的 FinalScoreText 所代表的Text GameObject
          */
-        for (int i = 0; i < TurnOnWhenEnd.Length; ++i)
+        //for (int i = 0; i < TurnOnWhenEnd.Length; ++i)
+        //{
+            TurnOnWhenEnd[0].SetActive(true);
+
+        if (scoreManager.CurrentScore >= 100)
         {
-            TurnOnWhenEnd[i].SetActive(true);
+            
+                TurnOnWhenEnd[1].SetActive(true);
+            
         }
+        else
+        {
+            TurnOnWhenEnd[2].SetActive(true);
+        }
+        //}
 
         //在 public GameObject[] TurnOfWhenEnd; 数列里的所有element(GameObject)都会被一个一个被.SetActivate(false)，被   关闭
         /*
@@ -93,14 +124,18 @@ public class GameManager : MonoBehaviour
         //{
         //    e.SetActive(false);
         //}
+        
+
+
+        
 
         //显示打开，关闭之后，将scoreManager.CurrentScore变成string然后赋值给代表FinalScoreText的 Text GameObject  
         if (scoreManager && CurrentTimeText) 
         {
-            FinalScoreText.text = scoreManager.CurrentScore.ToString();        
+            FinalScoreText.text =  scoreManager.CurrentScore.ToString();        
         }
 
-       
+        
 
     }
 }

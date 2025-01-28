@@ -25,6 +25,12 @@ public class Coin : MonoBehaviour
     //为了调用 scoreManager.AddScore，所以先使用ScoreManager class，(另一个我们的script)
     private ScoreManager scoreManager;
 
+    public bool destroy = true;
+
+    public float timer = 2f;
+
+
+
     //当游戏开始的时候
     void Start()
     {
@@ -55,28 +61,43 @@ public class Coin : MonoBehaviour
     private void OnMouseOver()
     {
         //若DeathSound有被找到，存在，则，创建这个GameObject (GameObject DeathSound;)，这个声音是来自Coin Sound, Coin是一个播放声音的Game Object
-        if (DeathSound) 
+        if (DeathSound)
         {
-            GameObject.Instantiate(DeathSound, gameObject.transform.position, gameObject.transform.rotation);
+            if (destroy == true)
+            {
+                GameObject.Instantiate(DeathSound, gameObject.transform.position, gameObject.transform.rotation);
+            }
+           
         }
 
         //若DeathParticle有被找到，存在，则，创建这个GameObject (GameObject DeathParticle;)
-        if (DeathPartice) 
+        if (DeathPartice)
         {
-            GameObject.Instantiate(DeathPartice, gameObject.transform.position, gameObject.transform.rotation);
+
+            if (destroy == true)
+            {
+                GameObject.Instantiate(DeathPartice, gameObject.transform.position, gameObject.transform.rotation);
+            }
+
+         
         }
 
         //当scoreManager这个组件(脚本)被GetComponent到，则使用这个class(组件)的public method .AddScore 然后填入 public int Amount = 10;
-        if (scoreManager) 
+
+        if (destroy == true)
         {
-            scoreManager.AddScore(Amount);
-        }
+             if (scoreManager)
+            {
+                scoreManager.AddScore(Amount);
+            }
 
         //要执行处理需要放在一个函数，方法里
         //Insantiate 音效，粒子。计分.AddScore()之后,调用来自Object类的静态方法(静态可以直接调用)，Destory 当前的被挂载脚本的GameObject既gameObject;
+        
+
         Destroy(gameObject);
 
-
+        }
     }
 
     
