@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
     public GameObject Blue3;
     public GameObject Pig;
 
+    private TimeController tc;
+
+    public DeadEye De;
+
     
 
 
@@ -46,6 +50,8 @@ public class GameManager : MonoBehaviour
         //我们要先get ScoreManager这个组件(脚本)，然后引用赋值给scoreManager，有声明有get
         //首先找到ScoreManager这个GameObject，然后找到其中的ScoreManager组件(脚本)。一个脚本被挂在GameObject时被视为一个Component
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        tc = GameObject.Find("TimeController").GetComponent<TimeController>();
+        
 
         //用public GameDuration来给timer赋值，决定从什么时候开始倒计时，timer是会一直变化的，所以最好用别的变量给他赋值避免在游戏中意外修改
         timer = GameDuration;
@@ -77,6 +83,11 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        
+        De.deadEyeSource.volume = 1;
+        Time.timeScale= 1;
+        
+        
 
         //当timer <= 0，不执行return时，便是游戏结束了，需要把在GameObject[]里的东西打开/关掉
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Tme : MonoBehaviour
 {
     public AudioClip Clip;
-    private AudioSource source;
+    public AudioSource source;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -11,7 +11,8 @@ public class Tme : MonoBehaviour
         source = GetComponent<AudioSource>();
         if (Clip && source) 
         {
-            source.PlayOneShot(Clip);
+            source.clip = Clip;
+            source.Play();
         }
     }
 
